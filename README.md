@@ -1,2 +1,2 @@
 # PyLearning
-python日常联系项目
+python日常练习项目
