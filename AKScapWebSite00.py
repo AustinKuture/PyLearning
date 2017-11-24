@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 from time import sleep
 import re
 
-# wf = open('cocochina.txt','w')
+wf = open('cocochina.txt','w')
 
 pages = set()
 def getLinks(pageUrl):
