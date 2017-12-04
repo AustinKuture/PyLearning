@@ -1,4 +1,4 @@
-
+#coding=utf-8
 # 创建符合WSGI协议的引用函数
 def applications(enviro, start_response):
 

@@ -1,3 +1,4 @@
+#coding=utf-8
 import socket
 import sys
 import re
@@ -147,6 +148,7 @@ if __name__ == '__main__':
 
     try:
 
+        # 获取从终端输入的参数
         if len(sys.argv) == 3:
 
             # 获取端口并进行判断
