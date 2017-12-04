@@ -168,8 +168,6 @@ if __name__ == '__main__':
                 module_name = web_module_all[:module_index]
                 apps_name = web_module_all[module_index + 1:]
 
-                print(os.listdir())
-                print()
                 if not (module_name + '.py') in os.listdir():
 
                     raise Exception('未找到框架模块')
