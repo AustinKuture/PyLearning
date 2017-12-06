@@ -1,4 +1,3 @@
-#coding=utf-8
 import socket
 import sys
 import re
@@ -57,8 +56,9 @@ class WSGI_server_tcp(object):
         if client_path is '/': client_path = '/index.html'
 
         # 判断资源类型
-        if client_path.endswith('.py'):
+        if client_path.endswith('.py') or client_path.endswith('.html'):
 
+            print('正在处理动态资源:', client_path)
             # 保存用户请求路径
             enviro = {'PATH_INFO':client_path}
 
@@ -70,24 +70,19 @@ class WSGI_server_tcp(object):
             self.__response_headers = response_line + self.__response_headers + '\r\n' + response_body
 
             # 返回客户端请求数据
-            client_socket.send(self.__response_headers.encode())
+            client_socket.send(self.__response_headers.encode('utf-8'))
             client_socket.close()
 
-        # 判断静态资源
-        elif client_path.endswith('.html'):
-
-            client_path = 'Static_Source' + client_path
-            self._static_source_deal(client_socket, client_path)
-
-        # 处理错误资源
+        # 处理其他资源
         else:
 
-            client_path = 'Error/404.html'
+            client_path = 'static' + client_path
             self._static_source_deal(client_socket, client_path)
 
     # 静态资源处理方法
     def _static_source_deal(self, client_socket, client_path):
 
+        print('正在处理静态资源:', client_path)
         response_body = ''
         # 读取文件
         try:
@@ -99,9 +94,8 @@ class WSGI_server_tcp(object):
         except Exception as error:
 
             print(error)
-            client_path = 'Error/404.html'
-            self._static_source_deal(client_socket, client_path)
-            return
+
+            response_body = '<h1 style="text-align: center;color: red"> 404 NotFound </h1>'
         else:
 
             response_body = content.decode()
@@ -132,7 +126,7 @@ class WSGI_server_tcp(object):
 
             # 获取客户端套接字及客户端请求地址
             client_socket, address = self._server_socket.accept()
-            print('%s正在连接...' %str(address))
+            print('%s正在连接...pid:%s' %(str(address), os.getpid()))
 
             # 设置客户端请求超时时间
             client_socket.settimeout(5)
@@ -148,7 +142,6 @@ if __name__ == '__main__':
 
     try:
 
-        # 获取从终端输入的参数
         if len(sys.argv) == 3:
 
             # 获取端口并进行判断
@@ -172,7 +165,7 @@ if __name__ == '__main__':
 
                 if not (module_name + '.py') in os.listdir():
 
-                    raise Exception('未找到框架模块')
+                    raise Exception('Error : 未找到框架模块')
 
                 # 引入模块与框架应用对象
                 web_module = __import__(module_name)
@@ -187,7 +180,7 @@ if __name__ == '__main__':
                 raise Exception('Error : 模块名及框架应用名参数格式错误')
         else:
 
-            raise Exception('Error : 输入格式错误，参数数量错误')
+            raise Exception('Error : 输入格式错误，参数数量有误')
     except Exception as error:
 
         print(error)
