@@ -16,26 +16,28 @@ class Random_Proxy(object):
 
         print('当前进程......%s' % num)
         # 创建代理处理
-        proxy_hander = request.ProxyHandler({"http": "http://45.112.126.214:3128"})
+        proxy_hander = request.ProxyHandler({"http": "http://117.90.252.179:9000"})
 
         # 创建opener
         proxy_opener = request.build_opener(proxy_hander)
 
         # 创建用户代理
-        proxy_opener.addheaders = [('User-Agent', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) '
-                                                  'AppleWebKit/537.36 (KHTML, like Gecko) '
-                                                  'Chrome/56.0.2924.87 Safari/537.36')]
+        proxy_opener.addheaders = [('User-Agent', 'Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0; .NET CLR 1.1.4322)')]
 
         # 安装opener
         request.install_opener(proxy_opener)
 
+        # agent_url = ''
         try:
 
-            agent_url = 'http://www.xicidaili.com/nn/%s' % num
-            res = request.urlopen(agent_url).read()
+            res = request.urlopen('http://www.xicidaili.com').read()
+
+            print(res)
+            # agent_url = 'http://www.xicidaili.com/nn/'
+            # res = request.urlopen(agent_url).read()
         except Exception as error:
 
-            print('代理网站异常或目标地址链接失效...%s', error)
+            print('代理网站(%s)异常或目标地址链接失效...%s'%('',error))
         else:
 
             ip_port_list = []
@@ -78,7 +80,7 @@ class Random_Proxy(object):
         back_list = manager.list()
         pro_list = []
 
-        for i in range(1,3):
+        for i in range(1,2):
 
             ip_pro = Process(target=self.__agent_ip_pro, args=(i, request_url, back_list))
             ip_pro.start()
