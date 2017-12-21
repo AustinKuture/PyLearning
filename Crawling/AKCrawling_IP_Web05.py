@@ -68,7 +68,7 @@ def obtain_ip(ip):
         url = 'http://www.ip138.com/ips1388.asp?ip=%s&action=2' %ip
 
         # 创建代理处理
-        proxy_hander = request.ProxyHandler({"http":"http://219.155.204.23:8080"})
+        proxy_hander = request.ProxyHandler({"http":"http://60.12.126.145:8080"})
 
         # 创建opener
         proxy_opener = request.build_opener(proxy_hander)
