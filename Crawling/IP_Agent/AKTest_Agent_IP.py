@@ -1,6 +1,4 @@
-import socket
-from urllib import request
-from Crawling.AKAgent_IP_Port import Random_Proxy
+from Crawling.IP_Agent.AKAgent_IP_Port import Random_Proxy
 
 agent_ip = Random_Proxy()
 agent_ip_list = agent_ip.obtain_agent_ip('http://ip.chinaz.com/getip.aspx')

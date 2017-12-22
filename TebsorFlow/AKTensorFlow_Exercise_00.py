@@ -1,10 +1,10 @@
-import os
-import numpy as np
-import tensorflow as tf
-from tensorflow.examples.tutorials.mnist import input_data
-
-
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+# import os
+# import numpy as np
+# import tensorflow as tf
+# from tensorflow.examples.tutorials.mnist import input_data
+#
+#
+# os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 # step = 5
 # x = tf.placeholder(dtype=tf.float32, shape=[step])
@@ -63,6 +63,8 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 # print(result)
 #
 # sess.close()
+
+
 
 
 

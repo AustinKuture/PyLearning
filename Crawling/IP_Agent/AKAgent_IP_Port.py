@@ -16,7 +16,7 @@ class Random_Proxy(object):
 
         print('当前进程......%s' % num)
         # 创建代理处理
-        proxy_hander = request.ProxyHandler({"http": "http://117.90.252.179:9000"})
+        proxy_hander = request.ProxyHandler({"http": "http://60.12.126.145:8080"})
 
         # 创建opener
         proxy_opener = request.build_opener(proxy_hander)
@@ -30,7 +30,7 @@ class Random_Proxy(object):
         # agent_url = ''
         try:
 
-            res = request.urlopen('http://www.xicidaili.com').read()
+            res = request.urlopen('http://www.xicidaili.com/nn').read()
 
             print(res)
             # agent_url = 'http://www.xicidaili.com/nn/'
